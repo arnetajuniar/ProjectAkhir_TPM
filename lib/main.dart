@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_tpm/view/currency_converter.dart';
 import 'package:project_tpm/view/feedback_page.dart';
 import 'package:project_tpm/view/home_page.dart';
 import 'package:project_tpm/view/page_search_books.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const FeedbackPage(),
+      home: const HomePage(),
     );
   }
 }
