@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../model/books_detail.dart';
 import '../controller/api_data_source.dart';
 
@@ -135,18 +136,24 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
                   "Publisher:\n ${bookDetail.year}",
                 ),
               ),
-              // Container(
-              //   padding: const EdgeInsets.all(5),
-              //   child: ElevatedButton(
-              //       onPressed: _launchURLread(),
-              //       child: const Text("Read Online")),
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.all(5),
-              //   child: ElevatedButton(
-              //       onPressed: _launchURLread(),
-              //       child: const Text("Free Download")),
-              // ),
+              Container(
+                padding: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    _launchURLread(bookDetail.url!);
+                  },
+                  child: const Text("Read Online"),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    _launchURLdownload(bookDetail.download!);
+                  },
+                  child: const Text("Free Download"),
+                ),
+              ),
             ],
           )),
         ),
@@ -154,12 +161,19 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
     );
   }
 
-  // Future<void> _launchURLread() async {
-  //   String url = Uri.parse();
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+  Future<void> _launchURLread(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchURLdownload(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }

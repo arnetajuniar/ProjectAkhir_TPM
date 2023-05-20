@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_tpm/view/page_search_books.dart';
+import 'package:project_tpm/view/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PageSearchBooks(),
+      home: const HomePage(),
     );
   }
 }
