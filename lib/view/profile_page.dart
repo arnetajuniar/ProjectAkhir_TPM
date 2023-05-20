@@ -18,10 +18,10 @@ class _ProfilePageState extends State<ProfilePage> {
         body: ListView(
           children: [
             SizedBox(
-              height: 180,
-              width: 450,
+              height: 300,
+              width: 50,
               child: Container(
-                margin: const EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.blue,
@@ -31,9 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     Radius.circular(15),
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
@@ -43,10 +43,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 60, horizontal: 20),
+                      padding: const EdgeInsets.only(top: 20),
                       child: const Text(
-                        "Arneta Juniar Setiawan\n 123200108",
+                        "Arneta Juniar Setiawan",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 10, bottom: 20),
+                      child: const Text(
+                        "123200108",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),

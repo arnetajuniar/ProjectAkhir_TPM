@@ -11,14 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-  List _screens = [HomePage(), ProfilePage(), FeedbackPage(), HomePage()];
-
-  void _updateIndex(int value) {
-    setState(() {
-      _currentIndex = value;
-    });
-  }
+  int _selectedTab = 0;
+  final _pageOptions = [
+    const HomePage(),
+    const ProfilePage(),
+    const FeedbackPage(),
+    const HomePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +103,12 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          onTap: _updateIndex,
+          currentIndex: _selectedTab,
+          onTap: (int index) {
+            setState(() {
+              _selectedTab = index;
+            });
+          },
           selectedItemColor: Colors.blue,
           selectedFontSize: 13,
           unselectedFontSize: 13,
@@ -130,20 +133,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget Logout() {
-    return TextButton.icon(
-      onPressed: () {
-        // Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-        //   MaterialPageRoute(
-        //     builder: (BuildContext context) {
-        //       return const LoginPage();
-        //     },
-        //   ),
-        //   (_) => false,
-        // );
-      },
-      icon: const Icon(Icons.logout, size: 40.0),
-      label: const Text("Logout"),
-    );
-  }
+  // Widget _buildBottomNavBar() {
+  //   return Scaffold(
+  //     bottomNavigationBar: BottomNavigationBar(
+  //       type: BottomNavigationBarType.fixed,
+  //       currentIndex: _selectedTab,
+  //       onTap: (int index) {
+  //         setState(() {
+  //           _selectedTab = index;
+  //         });
+  //       },
+  //       selectedItemColor: Colors.blue,
+  //       selectedFontSize: 13,
+  //       unselectedFontSize: 13,
+  //       iconSize: 30,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           label: "Home",
+  //           icon: Icon(Icons.home),
+  //         ),
+  //         BottomNavigationBarItem(
+  //           label: "Profile",
+  //           icon: Icon(Icons.account_circle),
+  //         ),
+  //         BottomNavigationBarItem(
+  //           label: "Feedback",
+  //           icon: Icon(Icons.feedback),
+  //         ),
+  //         BottomNavigationBarItem(label: "Logout", icon: Icon(Icons.logout)),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

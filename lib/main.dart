@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_tpm/view/feedback_page.dart';
 import 'package:project_tpm/view/home_page.dart';
+import 'package:project_tpm/view/page_search_books.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const FeedbackPage(),
     );
   }
 }
