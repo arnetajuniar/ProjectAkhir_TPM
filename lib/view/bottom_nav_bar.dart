@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../page_feedback.dart';
-import '../page_home.dart';
-import '../page_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'page_feedback.dart';
+import 'page_home.dart';
+import 'page_login.dart';
+import 'page_profile.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -20,6 +21,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
     HomePage(),
   ];
 
+  Future<void> _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +39,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedTab,
         onTap: (int index) {
-          setState(() {
-            _selectedTab = index;
-          });
+          if (index == 3) {
+            _logout();
+          } else {
+            setState(() {
+              _selectedTab = index;
+            });
+          }
         },
         selectedItemColor: Colors.blue,
         selectedFontSize: 13,

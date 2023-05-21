@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_tpm/view/widget/bottom_nav_bar.dart';
+import 'package:project_tpm/view/page_login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BottomNavBar(),
+      home: const LoginPage(),
     );
   }
 }

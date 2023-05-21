@@ -39,6 +39,7 @@ dependencies:
   url_launcher: 6.0.20
   url_launcher_web: 2.0.6
   intl: ^0.18.0
+  shared_preferences: ^2.0.12
 
 dev_dependencies:
   flutter_test:

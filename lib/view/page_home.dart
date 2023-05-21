@@ -5,7 +5,7 @@ import 'package:project_tpm/view/page_feedback.dart';
 import 'package:project_tpm/view/page_search_books.dart';
 import 'package:project_tpm/view/page_profile.dart';
 import 'package:project_tpm/view/page_time_converter.dart';
-import 'package:project_tpm/view/widget/bottom_nav_bar.dart';
+import 'package:project_tpm/view/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,20 +15,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // int _selectedTab = 0;
-  // final List<Widget> _pageOptions = <Widget>[
-  //   HomePage(),
-  //   ProfilePage(),
-  //   FeedbackPage(),
-  //   HomePage(),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Menu"),
+          automaticallyImplyLeading: false,
         ),
         body: Center(
           child: GridView.count(

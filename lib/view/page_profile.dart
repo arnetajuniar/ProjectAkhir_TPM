@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
         body: ListView(
           children: [
             SizedBox(
-              height: 300,
+              height: 320,
               width: 50,
               child: Container(
                 margin: const EdgeInsets.all(15),
@@ -52,9 +52,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(top: 10, bottom: 20),
+                      padding: const EdgeInsets.only(top: 10),
                       child: const Text(
                         "123200108",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 10, bottom: 20),
+                      child: const Text(
+                        "IF-C",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
