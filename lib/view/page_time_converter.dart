@@ -15,7 +15,7 @@ class _TimeConverterState extends State<TimeConverter> {
   @override
   void initState() {
     super.initState();
-    _updateTime();
+    print("00:00:00");
   }
 
   void _updateTime() {

@@ -12,7 +12,7 @@ class PageDetailBooks extends StatefulWidget {
 }
 
 class _PageDetailBooksState extends State<PageDetailBooks> {
-  BookDetail? filmDetail;
+  BookDetail? bookDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,8 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          BookDetail filmDetail = BookDetail.fromJson(snapshot.data);
-          return _buildItemUsers(filmDetail);
+          BookDetail bookDetail = BookDetail.fromJson(snapshot.data);
+          return _buildItemUsers(bookDetail);
         }
         return _buildLoadingSection();
       },

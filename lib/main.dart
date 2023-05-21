@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_tpm/view/page_currency_converter.dart';
-import 'package:project_tpm/view/page_feedback.dart';
-import 'package:project_tpm/view/page_home.dart';
-import 'package:project_tpm/view/page_search_books.dart';
 import 'package:project_tpm/view/widget/bottom_nav_bar.dart';
 
 void main() {
