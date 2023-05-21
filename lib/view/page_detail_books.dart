@@ -61,7 +61,7 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
           width: 320,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.blue,
+              color: Colors.teal,
               width: 1,
             ),
             borderRadius: const BorderRadius.all(
@@ -116,7 +116,7 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
               Container(
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  "ISBN\n ${bookDetail.id}",
+                  "ISBN:\n ${bookDetail.id}",
                 ),
               ),
               Container(

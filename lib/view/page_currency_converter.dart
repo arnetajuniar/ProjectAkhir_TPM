@@ -242,7 +242,10 @@ class _ConvertCurrencyState extends State<ConvertCurrency> {
             ),
             ElevatedButton(
               onPressed: _convertCurrency,
-              child: const Text("CONVERT"),
+              child: const Text(
+                "CONVERT",
+                style: TextStyle(fontSize: 18),
+              ),
             ),
             const SizedBox(
               height: 30,
