@@ -83,7 +83,7 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.only(top: 20, bottom: 10),
                 alignment: Alignment.center,
                 child: Text(
                   "${bookDetail.title}",
@@ -101,6 +101,7 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
               ),
               Container(
                 padding: const EdgeInsets.all(5),
+                alignment: Alignment.center,
                 child: Text(
                   "by ${bookDetail.authors}",
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -127,13 +128,13 @@ class _PageDetailBooksState extends State<PageDetailBooks> {
               Container(
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  "Publisher:\n ${bookDetail.pages}",
+                  "Pages:\n ${bookDetail.pages}",
                 ),
               ),
               Container(
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  "Publisher:\n ${bookDetail.year}",
+                  "Year:\n ${bookDetail.year}",
                 ),
               ),
               Container(

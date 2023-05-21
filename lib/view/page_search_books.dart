@@ -27,24 +27,40 @@ class _PageSearchBooksState extends State<PageSearchBooks> {
               padding: const EdgeInsets.all(20),
               child: Container(
                 padding: const EdgeInsets.all(1),
-                child: Container(
-                  child: TextField(
-                    selectionHeightStyle: BoxHeightStyle.max,
-                    style: GoogleFonts.nunitoSans(
-                        textStyle: const TextStyle(fontSize: 15)),
-                    decoration: InputDecoration(
-                      hintStyle: GoogleFonts.nunitoSans(fontSize: 15.0),
-                      hintText: "Enter book title or author",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(7.0)),
-                      filled: true,
-                      icon: const Icon(
-                        Icons.search,
-                        size: 40.0,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(top: 50, bottom: 15),
+                      child: const Text("Welcome to dBooks Library",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: const Text("FREE DOWNLOAD OPEN BOOKS",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                    Container(
+                      child: TextField(
+                        selectionHeightStyle: BoxHeightStyle.max,
+                        style: GoogleFonts.nunitoSans(
+                            textStyle: const TextStyle(fontSize: 15)),
+                        decoration: InputDecoration(
+                          hintStyle: GoogleFonts.nunitoSans(fontSize: 15.0),
+                          hintText: "Enter book title, ISBN or author",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7.0)),
+                          filled: true,
+                          icon: const Icon(
+                            Icons.search,
+                            size: 40.0,
+                          ),
+                        ),
+                        controller: _controller,
                       ),
                     ),
-                    controller: _controller,
-                  ),
+                  ],
                 ),
               ),
             ),

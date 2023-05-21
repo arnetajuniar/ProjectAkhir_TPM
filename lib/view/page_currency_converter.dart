@@ -26,6 +26,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
     return await client.getCurrencies();
   }
 
+  @override
   void initState() {
     super.initState();
     (() async {
@@ -49,9 +50,9 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              const SizedBox(
                 width: 200,
-                child: const Text(
+                child: Text(
                   "Currency Converter",
                   style: TextStyle(
                     color: Colors.white,
@@ -74,7 +75,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                               (rate * double.parse(value)).toStringAsFixed(3);
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           labelText: "Input value to convert",
@@ -82,7 +83,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                               fontWeight: FontWeight.normal,
                               fontSize: 18,
                               color: Colors.black)),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -90,7 +91,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -109,7 +110,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                               to = temp;
                             });
                           },
-                          child: Icon(Icons.swap_horiz),
+                          child: const Icon(Icons.swap_horiz),
                           elevation: 0,
                         ),
                         customDropDown(currencies, to, (val) {
