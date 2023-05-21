@@ -1,156 +1,260 @@
 import 'package:flutter/material.dart';
-import 'package:project_tpm/service/api_client.dart';
-import 'package:project_tpm/view/widget/drop_down.dart';
 
-class CurrencyConverter extends StatefulWidget {
-  const CurrencyConverter({Key? key}) : super(key: key);
+class ConvertCurrency extends StatefulWidget {
+  const ConvertCurrency({Key? key}) : super(key: key);
 
   @override
-  State<CurrencyConverter> createState() => _CurrencyConverterState();
+  State<ConvertCurrency> createState() => _ConvertCurrencyState();
 }
 
-class _CurrencyConverterState extends State<CurrencyConverter> {
-  //instance for API client
-  ApiClient client = ApiClient();
+class _ConvertCurrencyState extends State<ConvertCurrency> {
+  final TextEditingController inputAmountData = TextEditingController();
 
-  //setting the variables
-  late List<String> currencies;
-  late String from;
-  late String to;
-
-  //variables for exchange rate
-  late double rate;
-  String result = "";
-
-  Future<List<String>> getCurrencyList() async {
-    return await client.getCurrencies();
-  }
+  late double dataInput;
+  late double dataOutput;
+  late String inputCurrency;
+  late String outputCurrency;
+  late String resultData;
 
   @override
   void initState() {
     super.initState();
-    (() async {
-      List<String> list = await client.getCurrencies();
-      setState(() {
-        currencies = list;
-      });
-    })();
+    dataInput = 0;
+    inputCurrency = 'IDR';
+    outputCurrency = 'IDR';
+    resultData = '';
+  }
+
+  void _onInputChanged(String value) {
+    setState(() {
+      dataInput = double.tryParse(value) ?? 0;
+    });
+  }
+
+  void _onCurrencyInputChanged(String? value) {
+    setState(() {
+      inputCurrency = value ?? 'IDR';
+    });
+  }
+
+  void _onCurrencyOutputChanged(String? value) {
+    setState(() {
+      outputCurrency = value ?? 'IDR';
+    });
+  }
+
+  void _convertCurrency() {
+    setState(() {
+      switch (inputCurrency) {
+        case 'IDR':
+          switch (outputCurrency) {
+            case 'IDR':
+              dataOutput = dataInput;
+              break;
+            case 'USD':
+              dataOutput = dataInput / 14800;
+              break;
+            case 'SGD':
+              dataOutput = dataInput / 11000;
+              break;
+            case 'JPY':
+              dataOutput = dataInput / 108;
+              break;
+            case 'EUR':
+              dataOutput = dataInput / 1600;
+              break;
+          }
+          break;
+        case 'USD':
+          switch (outputCurrency) {
+            case 'IDR':
+              dataOutput = dataInput * 14800;
+              break;
+            case 'USD':
+              dataOutput = dataInput;
+              break;
+            case 'SGD':
+              dataOutput = dataInput * 1.34;
+              break;
+            case 'JPY':
+              dataOutput = dataInput * 138;
+              break;
+            case 'EUR':
+              dataOutput = dataInput * 0.92;
+              break;
+          }
+          break;
+        case 'SGD':
+          switch (outputCurrency) {
+            case 'IDR':
+              dataOutput = dataInput * 11000;
+              break;
+            case 'USD':
+              dataOutput = dataInput * 0.74;
+              break;
+            case 'SGD':
+              dataOutput = dataInput;
+              break;
+            case 'JPY':
+              dataOutput = dataInput * 102;
+              break;
+            case 'EUR':
+              dataOutput = dataInput * 0.68;
+              break;
+          }
+          break;
+        case 'JPY':
+          switch (outputCurrency) {
+            case 'IDR':
+              dataOutput = dataInput * 108;
+              break;
+            case 'USD':
+              dataOutput = dataInput * 0.007;
+              break;
+            case 'SGD':
+              dataOutput = dataInput * 0.009;
+              break;
+            case 'JPY':
+              dataOutput = dataInput;
+              break;
+            case 'EUR':
+              dataOutput = dataInput * 0.006;
+              break;
+          }
+          break;
+        case 'EUR':
+          switch (outputCurrency) {
+            case 'IDR':
+              dataOutput = dataInput * 16000;
+              break;
+            case 'USD':
+              dataOutput = dataInput * 1.08;
+              break;
+            case 'SGD':
+              dataOutput = dataInput * 1.45;
+              break;
+            case 'JPY':
+              dataOutput = dataInput * 149;
+              break;
+            case 'EUR':
+              dataOutput = dataInput;
+              break;
+          }
+          break;
+      }
+      resultData = dataOutput.toStringAsFixed(2);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       appBar: AppBar(
         title: const Text("Currency Converter"),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 200,
-                child: Text(
-                  "Currency Converter",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
+      body: Padding(
+        padding:
+            const EdgeInsets.only(top: 20, left: 30, right: 30, bottom: 15),
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            const Center(
+              child: Text(
+                "Amount",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
-              Expanded(
-                  child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextField(
-                      onSubmitted: (value) async {
-                        rate = await client.getRate(from, to);
-                        setState(() {
-                          result =
-                              (rate * double.parse(value)).toStringAsFixed(3);
-                        });
-                      },
-                      decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Input value to convert",
-                          labelStyle: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 18,
-                              color: Colors.black)),
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        customDropDown(currencies, from, (val) {
-                          setState(() {
-                            from = val;
-                          });
-                        }),
-                        FloatingActionButton(
-                          onPressed: () {
-                            String temp = from;
-                            setState(() {
-                              from = to;
-                              to = temp;
-                            });
-                          },
-                          child: const Icon(Icons.swap_horiz),
-                          elevation: 0,
-                        ),
-                        customDropDown(currencies, to, (val) {
-                          setState(() {
-                            to = val;
-                          });
-                        }),
-                      ],
-                    ),
-                    const SizedBox(height: 50),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Result",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(result,
-                              style: const TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                    )
-                  ],
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(20),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
+              child: TextField(
+                onChanged: _onInputChanged,
+                controller: inputAmountData,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                    hintText: "Enter amount",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder()),
+              ),
+            ),
+            const Center(
+              child: Text(
+                "From",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-              ))
-            ],
-          ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            DropdownButton<String>(
+              value: inputCurrency,
+              elevation: 15,
+              onChanged: _onCurrencyInputChanged,
+              items: const <String>['IDR', 'USD', 'SGD', 'JPY', 'EUR']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value, style: const TextStyle(fontSize: 18)));
+              }).toList(),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Center(
+              child: Text(
+                "To",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            DropdownButton<String>(
+              value: outputCurrency,
+              elevation: 15,
+              onChanged: _onCurrencyOutputChanged,
+              items: const <String>['IDR', 'USD', 'SGD', 'JPY', 'EUR']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value, style: const TextStyle(fontSize: 18)));
+              }).toList(),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: _convertCurrency,
+              child: const Text("CONVERT"),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              resultData,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20),
+            ),
+          ],
         ),
       ),
-    );
+    ));
   }
 }

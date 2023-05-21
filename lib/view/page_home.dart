@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_tpm/view/page_currency_converter.dart';
+import 'package:project_tpm/view/page_currency_converter.dart';
 import 'package:project_tpm/view/page_feedback.dart';
 import 'package:project_tpm/view/page_search_books.dart';
 import 'package:project_tpm/view/page_profile.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return CurrencyConverter();
+                      return ConvertCurrency();
                     }));
                   },
                   splashColor: Colors.blue,

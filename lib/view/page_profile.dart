@@ -39,7 +39,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: const EdgeInsets.all(10),
                       child: const CircleAvatar(
                         radius: 70,
-                        backgroundImage: AssetImage('assets/img/arneta.jpg'),
+                        backgroundImage:
+                            AssetImage('assets/img/foto_arneta.jpg'),
                       ),
                     ),
                     Container(
