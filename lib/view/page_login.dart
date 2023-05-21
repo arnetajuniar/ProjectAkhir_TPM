@@ -1,161 +1,137 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:crypto/crypto.dart';
 import 'package:project_tpm/view/bottom_nav_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'components/textfield_component.dart';
-import 'page_signup.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  String valueUsername = "";
-  String valuePassword = "";
-  String username = "";
-  String password = "";
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Login",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFields(
-              hintText: "Username",
-              controller: _usernameController,
-              obscureText: false,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextFields(
-              hintText: "Password",
-              controller: _passwordController,
-              obscureText: true,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_usernameController.text != "" &&
-                          _passwordController.text != "") {
-                        getCredential();
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text("Login Failed"),
-                                content: const Text(
-                                    "Username or password cannot be empty"),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("Close"))
-                                ],
-                              );
-                            });
-                      }
-                    },
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: SizedBox(
-                    height: 10,
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const SignUpPage();
-                      }));
-                    },
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login() async {
+    final username = _usernameController.text.trim();
+    final password = _passwordController.text.trim();
+
+    final loginBox = Hive.box('loginBox');
+    final hashedPassword = sha256.convert(utf8.encode(password)).toString();
+
+    if (loginBox.containsKey(username)) {
+      final storedPassword = loginBox.get(username);
+      if (hashedPassword == storedPassword) {
+        // Login successful
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavBar()),
+        );
+      } else {
+        // Invalid password
+        _showSnackbar('Invalid Password');
+      }
+    } else {
+      // Username not found
+      _showSnackbar('Username Not Found');
+    }
+  }
+
+  Future<void> _register() async {
+    final username = _usernameController.text.trim();
+    final password = _passwordController.text.trim();
+
+    final loginBox = Hive.box('loginBox');
+    final hashedPassword = sha256.convert(utf8.encode(password)).toString();
+
+    if (loginBox.containsKey(username)) {
+      // Username already exists
+      _showSnackbar('Username already exists');
+    } else {
+      loginBox.put(username, hashedPassword);
+      // Registration successful
+      _showSnackbar('Registration Successful');
+    }
+  }
+
+  void _showSnackbar(String message) {
+    _scaffoldKey.currentState?.showSnackBar(
+      SnackBar(
+        content: Text(message),
       ),
     );
   }
 
-  getCredential() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      bool status = sharedPreferences.getBool("status")!;
-      print(status);
-      if (status == false) {
-        setState(() {
-          username = sharedPreferences.getString("username")!;
-          password = sharedPreferences.getString("password")!;
-        });
-        if (username == _usernameController.text &&
-            password == _passwordController.text) {
-          setState(() {
-            sharedPreferences.setBool("status", true);
-          });
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return const BottomNavBar();
-          }));
-        } else {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Login Failed"),
-                  content: const Text("Incorrect username or password"),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Close"))
-                  ],
-                );
-              });
-        }
-      } else {
-        _usernameController.clear();
-        _passwordController.clear();
-      }
-    });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Container(
+        padding: EdgeInsets.all(30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              "Let's Get Started!",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              child: Column(
+                children: [
+                  const SizedBox(height: 30),
+                  TextField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Username',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                    ),
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _login,
+                        child: const Text('Login'),
+                        // style: ElevatedButton.styleFrom(
+                        //   primary: Colors.red[300],
+                        // ),
+                      ),
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                        onPressed: _register,
+                        child: const Text('Register'),
+                        // style: ElevatedButton.styleFrom(
+                        //   primary: Colors.red[300],
+                        // ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

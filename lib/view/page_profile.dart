@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 margin: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.blue,
+                    color: Colors.teal,
                     width: 1,
                   ),
                   borderRadius: const BorderRadius.all(

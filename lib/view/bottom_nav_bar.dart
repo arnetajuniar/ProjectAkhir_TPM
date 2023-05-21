@@ -47,7 +47,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             });
           }
         },
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.teal,
         selectedFontSize: 13,
         unselectedFontSize: 13,
         iconSize: 30,

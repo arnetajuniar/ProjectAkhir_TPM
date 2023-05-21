@@ -37,12 +37,12 @@ class _HomePageState extends State<HomePage> {
                       return const PageSearchBooks();
                     }));
                   },
-                  splashColor: Colors.blue,
+                  splashColor: Colors.teal,
                   child: Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: const <Widget>[
-                        Icon(Icons.menu_book, size: 70, color: Colors.blue),
+                        Icon(Icons.menu_book, size: 70, color: Colors.teal),
                         Padding(padding: EdgeInsets.only(top: 20)),
                         Text(
                           "Search Books",
@@ -62,12 +62,12 @@ class _HomePageState extends State<HomePage> {
                       return ConvertCurrency();
                     }));
                   },
-                  splashColor: Colors.blue,
+                  splashColor: Colors.teal,
                   child: Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: const <Widget>[
-                        Icon(Icons.attach_money, size: 70, color: Colors.blue),
+                        Icon(Icons.attach_money, size: 70, color: Colors.teal),
                         Padding(padding: EdgeInsets.only(top: 20)),
                         Text(
                           "Currency Converter",
@@ -87,12 +87,12 @@ class _HomePageState extends State<HomePage> {
                       return const TimeConverter();
                     }));
                   },
-                  splashColor: Colors.blue,
+                  splashColor: Colors.teal,
                   child: Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: const <Widget>[
-                        Icon(Icons.watch, size: 70, color: Colors.blue),
+                        Icon(Icons.watch, size: 70, color: Colors.teal),
                         Padding(padding: EdgeInsets.only(top: 20)),
                         Text(
                           "Time Zone Converter",
