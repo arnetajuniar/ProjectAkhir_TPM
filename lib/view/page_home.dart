@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:project_tpm/view/page_currency_converter.dart';
 import 'package:project_tpm/view/page_feedback.dart';
 import 'package:project_tpm/view/page_search_books.dart';
 import 'package:project_tpm/view/page_profile.dart';
+import 'package:project_tpm/view/page_time_converter.dart';
 import 'package:project_tpm/view/widget/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -47,6 +49,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: const <Widget>[
                         Icon(Icons.menu_book, size: 70, color: Colors.blue),
+                        Padding(padding: EdgeInsets.only(top: 20)),
                         Text(
                           "Search Books",
                           style: TextStyle(fontSize: 17),
@@ -60,9 +63,10 @@ class _HomePageState extends State<HomePage> {
                 margin: const EdgeInsets.all(10),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    //   return HitungLayang();
-                    // }));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return CurrencyConverter();
+                    }));
                   },
                   splashColor: Colors.blue,
                   child: Center(
@@ -70,6 +74,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: const <Widget>[
                         Icon(Icons.attach_money, size: 70, color: Colors.blue),
+                        Padding(padding: EdgeInsets.only(top: 20)),
                         Text(
                           "Currency Converter",
                           style: TextStyle(fontSize: 17),
@@ -83,9 +88,10 @@ class _HomePageState extends State<HomePage> {
                 margin: const EdgeInsets.all(10),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    //   return dataDiri();
-                    // }));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const TimeConverter();
+                    }));
                   },
                   splashColor: Colors.blue,
                   child: Center(
@@ -93,6 +99,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: const <Widget>[
                         Icon(Icons.watch, size: 70, color: Colors.blue),
+                        Padding(padding: EdgeInsets.only(top: 20)),
                         Text(
                           "Time Zone Converter",
                           style: TextStyle(fontSize: 17),
