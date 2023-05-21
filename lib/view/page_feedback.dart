@@ -14,6 +14,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Feedback"),
+          automaticallyImplyLeading: false,
         ),
         body: ListView(
           children: [

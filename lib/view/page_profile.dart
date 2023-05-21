@@ -14,6 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Profile"),
+          automaticallyImplyLeading: false,
         ),
         body: ListView(
           children: [

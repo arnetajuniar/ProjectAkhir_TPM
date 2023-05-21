@@ -18,13 +18,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
     HomePage(),
     ProfilePage(),
     FeedbackPage(),
-    HomePage(),
   ];
 
   Future<void> _logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
-    Navigator.of(context).pushReplacement(
+    Navigator.pushReplacement(
+      context,
       MaterialPageRoute(builder: (_) => LoginPage()),
     );
   }
