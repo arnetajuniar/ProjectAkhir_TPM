@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'page_feedback.dart';
 import 'page_home.dart';
 import 'page_login.dart';
 import 'page_profile.dart';
@@ -16,6 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pageOptions = <Widget>[
     HomePage(),
     ProfilePage(),
+    FeedbackPage(),
   ];
 
   Future<void> _logout() async {

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project_tpm/view/page_currency_converter.dart';
+import 'package:project_tpm/view/page_currency_converter.dart';
+import 'package:project_tpm/view/page_feedback.dart';
 import 'package:project_tpm/view/page_search_books.dart';
-// import 'package:project_tpm/view/page_profile.dart';
-// import 'package:project_tpm/view/bottom_nav_bar.dart';
+import 'package:project_tpm/view/page_profile.dart';
+import 'package:project_tpm/view/page_time_converter.dart';
+import 'package:project_tpm/view/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,10 +57,10 @@ class _HomePageState extends State<HomePage> {
                 margin: const EdgeInsets.all(10),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //   return ConvertCurrency();
-                    // }));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ConvertCurrency();
+                    }));
                   },
                   splashColor: Colors.teal,
                   child: Center(
@@ -78,10 +82,10 @@ class _HomePageState extends State<HomePage> {
                 margin: const EdgeInsets.all(10),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //   return const TimeConverter();
-                    // }));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const TimeConverter();
+                    }));
                   },
                   splashColor: Colors.teal,
                   child: Center(
