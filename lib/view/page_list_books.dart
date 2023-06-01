@@ -70,6 +70,7 @@ class _PageListBooksState extends State<PageListBooks> {
                 builder: (context) => PageDetailBooks(id: book.id!)))
       },
       child: Card(
+        color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

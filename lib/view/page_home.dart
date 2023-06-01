@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        //backgroundColor: Colors.amber,
         appBar: AppBar(
           title: const Text("Menu"),
           automaticallyImplyLeading: false,
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Card(
+                //color: Colors.white,
                 margin: const EdgeInsets.all(10),
                 child: InkWell(
                   onTap: () {

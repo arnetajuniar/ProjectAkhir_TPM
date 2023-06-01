@@ -49,6 +49,7 @@ class _TimeConverterState extends State<TimeConverter> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Time Zone Converter"),
+          backgroundColor: Colors.teal,
         ),
         body: Column(
           children: [
@@ -66,47 +67,71 @@ class _TimeConverterState extends State<TimeConverter> {
                       });
                       _updateTime();
                     },
-                    child: const Text("WIB"),
+                    child: const Text("WIB",
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.teal,
+                    ),
                     onPressed: () {
                       setState(() {
                         _zone = 'WITA';
                       });
                       _updateTime();
                     },
-                    child: const Text("WITA"),
+                    child: const Text(
+                      "WITA",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.teal,
+                    ),
                     onPressed: () {
                       setState(() {
                         _zone = 'WIT';
                       });
                       _updateTime();
                     },
-                    child: const Text("WIT"),
+                    child: const Text(
+                      "WIT",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _zone = 'London';
-                      });
-                      _updateTime();
-                    },
-                    child: const Text("London"),
-                  ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _zone = 'London';
+                        });
+                        _updateTime();
+                      },
+                      child: const Text(
+                        "London",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )),
                 ),
               ],
             ),

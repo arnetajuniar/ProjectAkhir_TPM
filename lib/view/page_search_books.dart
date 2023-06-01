@@ -19,6 +19,7 @@ class _PageSearchBooksState extends State<PageSearchBooks> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Search Books"),
+        backgroundColor: Colors.teal,
       ),
       body: Container(
         child: Column(children: [
@@ -70,13 +71,17 @@ class _PageSearchBooksState extends State<PageSearchBooks> {
               padding: const EdgeInsets.all(1),
               child: Container(
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal,
+                  ),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return PageListBooks(text: _controller.text);
                     }));
                   },
-                  child: const Text("SEARCH", style: TextStyle(fontSize: 18)),
+                  child: const Text("SEARCH",
+                      style: TextStyle(fontSize: 18, color: Colors.white)),
                 ),
               )),
         ]),
